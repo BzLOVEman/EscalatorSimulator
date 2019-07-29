@@ -4,21 +4,24 @@ using UnityEngine;
 
 public class CreateHuman : MonoBehaviour {
 
+    private Administlator admin;
     //人間全体の数
-    int humanNum = 100;
+    int humanNum;
     //全体におけるゆっくりの人の確率　1以下
-    float slowlyProbability = 1;
     int slowlyHuman;
     int hurryHuman;
     //人のオブジェクトなど共通部分一式
     [SerializeField]
     GameObject humanObject;
     //整列時の人間間の距離
-    float humanRange = 1;
+    float humanRange;
 
     void Start() {
-        slowlyHuman = (int)( humanNum * slowlyProbability );
-        hurryHuman = humanNum - slowlyHuman;
+        admin = GameObject.Find("System").GetComponent<Administlator>();
+        slowlyHuman = admin.SlowlyHumanNum;
+        hurryHuman = admin.HurryHumanNum;
+        humanNum = admin.HumanNum;
+        humanRange = admin.HumanRange;
         createHuman();
     }
 
@@ -48,9 +51,9 @@ public class CreateHuman : MonoBehaviour {
                                                    0,
                                                    i % squareSideLength * ( humanRange + 1 ));
             //階段前を中心にする
-            human.transform.position = new Vector3(squareSideLength * ( humanRange + 1 ) - human.transform.position.x,
+            human.transform.position = new Vector3(/*-squareSideLength * ( humanRange + 1 ) / 2*/ -human.transform.position.x - 10,
                                                    human.transform.position.y,
-                                                   squareSideLength * ( humanRange + 1 ) - human.transform.position.z);
+                                                   squareSideLength * ( humanRange + 1 ) / 2 - human.transform.position.z);
         }
     }
 }
