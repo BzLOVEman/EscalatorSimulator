@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class CreateHuman : MonoBehaviour {
 
-    private Administlator admin;
     //人間全体の数
     int humanNum;
     //全体におけるゆっくりの人の確率　1以下
@@ -17,11 +16,10 @@ public class CreateHuman : MonoBehaviour {
     float humanRange;
 
     void Start() {
-        admin = GameObject.Find("System").GetComponent<Administlator>();
-        slowlyHuman = admin.SlowlyHumanNum;
-        hurryHuman = admin.HurryHumanNum;
-        humanNum = admin.HumanNum;
-        humanRange = admin.HumanRange;
+        slowlyHuman = variables.slowlyHuman;
+        hurryHuman = variables.hurryHuman;
+        humanNum = variables.humanNum;
+        humanRange = variables.humanRange;
         createHuman();
     }
 

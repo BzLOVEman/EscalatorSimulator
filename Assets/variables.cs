@@ -7,43 +7,38 @@ using UnityEngine;
 public class variables : MonoBehaviour {
 
     //急ぎたい人の列
-    protected static int[] hurryColumn;
+    public static int[] hurryColumn { get; set; }
+
     //ゆっくりの人の列
-    public static int[] slowlyColumn;
+    public static int[] slowlyColumn { get; set; }
+
     //人間全体の数
-    protected static int humanNum = 100;
+    public static int humanNum { get; set; }
+
     //全体におけるゆっくりの人の確率　1以下
-    public static float slowlyProbability = 1;
+    public static float slowlyProbability { get; set; }
+
     //各陣営の人数
-    public static int slowlyHuman;
-    public static int hurryHuman;
+    public static int slowlyHuman { get; set; }
+    public static int hurryHuman{ get; set; }
+    
     //人のオブジェクトなど共通部分一式
-    public static GameObject humanObject;
+    public static GameObject humanObject { get; set; }
+    
     //整列時の人間間の距離
-    public static float humanRange = 1;
-
-    public static int[] HurryColumn {
-        get { return hurryColumn; }
-        set { hurryColumn = value; }
-    }
-
-    public static int[] SlowlyColumn {
-        get { return slowlyColumn; }
-        set { slowlyColumn = value; }
-    }
-
-    public static int HumanNum {
-        get { return humanNum; }
-        set { humanNum = value; }
-    }
-
-    public static float SlowlyProbability {
-        get { return slowlyProbability; }
-        set { slowlyProbability = value; }
-    }
+    public static float humanRange { get; set; }
+    
+    //エスカレーターのステップ数
+    private int stepSum;
+    
+    //エスカレーターのステップ一段あたりに乗れる人数
+    private int stepLimite = 2;
+    
+    //このオブジェクトの下にエスカレーターのオブジェクトをすべて配置
+    public GameObject stepParent;
 
     //全シーンで有効にする
-    void Start() {
+    private void Awake() {
         DontDestroyOnLoad(this);
     }
 }
