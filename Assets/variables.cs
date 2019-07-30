@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-//変数管理専用
+//変数管理・初期化専用
 
 public class variables : MonoBehaviour {
 
@@ -29,16 +29,34 @@ public class variables : MonoBehaviour {
     public static float humanRange { get; set; }
     
     //エスカレーターのステップ数
-    private int stepSum;
+    public static int stepSum { get; set; }
     
     //エスカレーターのステップ一段あたりに乗れる人数
-    private int stepLimite = 2;
+    public static int stepLimite { get; set; }
     
     //このオブジェクトの下にエスカレーターのオブジェクトをすべて配置
-    public GameObject stepParent;
+    public static GameObject stepParent { get; set; }
+
+    /* Inspectorからの参照用 */
+    [SerializeField]
+    private GameObject humanObjectImport;
 
     //全シーンで有効にする
     private void Awake() {
         DontDestroyOnLoad(this);
+
+        humanNum = 100;
+        slowlyProbability = 1;
+        humanObject = humanObjectImport;
+        humanRange = 1;
+        stepSum = 10;
+        stepLimite = 2;
+        stepParent = this.gameObject;
+
+        /* static変数の初期化 */
+        slowlyHuman = (int)( humanNum * slowlyProbability );
+        hurryHuman = humanNum - slowlyHuman;
+        hurryColumn = new int[hurryHuman];
+        slowlyColumn = new int[slowlyHuman];
     }
 }

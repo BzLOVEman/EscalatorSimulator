@@ -284,8 +284,7 @@ Light:
   m_BounceIntensity: 1
   m_ColorTemperature: 6570
   m_UseColorTemperature: 0
-  m_BoundingSphereOverride: {x: 0.0000000018775381, y: 0.0000000037252903, z: -Infinity,
-    w: 6.6174445e-24}
+  m_BoundingSphereOverride: {x: 0, y: 0, z: 0, w: 0}
   m_UseBoundingSphereOverride: 0
   m_ShadowRadius: 0
   m_ShadowAngle: 0
@@ -314,6 +313,8 @@ GameObject:
   - component: {fileID: 955951786}
   - component: {fileID: 955951785}
   - component: {fileID: 955951787}
+  - component: {fileID: 955951788}
+  - component: {fileID: 955951789}
   m_Layer: 0
   m_Name: System
   m_TagString: Untagged
@@ -333,7 +334,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 503240a8aad24f24a9d0fff87ec24688, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  stepParent: {fileID: 955951784}
 --- !u!4 &955951786
 Transform:
   m_ObjectHideFlags: 0
@@ -360,7 +360,31 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b7390fcb7c8e3f43974dde8cf151363, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  humanObject: {fileID: 2231731997002958689, guid: 21d83d2f89418254096c1383905be8bc,
+--- !u!114 &955951788
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 955951784}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a726c6d402c43fb40a5f6cf2c1d33b89, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &955951789
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 955951784}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2ffea397a4ccabc42a1949cbe6565d5d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  humanObjectImport: {fileID: 2231731997002958689, guid: 21d83d2f89418254096c1383905be8bc,
     type: 3}
 --- !u!1 &963194225
 GameObject:
