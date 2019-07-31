@@ -37,6 +37,10 @@ public class variables : MonoBehaviour {
     //このオブジェクトの下にエスカレーターのオブジェクトをすべて配置
     public static GameObject stepParent { get; set; }
 
+    //人間を正方形に配置する際の、正方形の一辺を求める
+    public static int squareSideLength { get; set; }
+
+
     /* Inspectorからの参照用 */
     [SerializeField]
     private GameObject humanObjectImport;
@@ -45,18 +49,23 @@ public class variables : MonoBehaviour {
     private void Awake() {
         DontDestroyOnLoad(this);
 
+        /* 単純な変数初期化 */
         humanNum = 100;
         slowlyProbability = 1;
         humanObject = humanObjectImport;
-        humanRange = 1;
+        humanRange = 2;
         stepSum = 10;
         stepLimite = 2;
         stepParent = this.gameObject;
 
-        /* static変数の初期化 */
+        /* 以下計算を伴う変数の初期化 */
         slowlyHuman = (int)( humanNum * slowlyProbability );
         hurryHuman = humanNum - slowlyHuman;
         hurryColumn = new int[hurryHuman];
         slowlyColumn = new int[slowlyHuman];
+
+        squareSideLength = 1;
+        while (Mathf.Pow(squareSideLength, 2) < humanNum)
+            squareSideLength++;
     }
 }
