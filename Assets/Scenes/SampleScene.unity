@@ -384,6 +384,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2ffea397a4ccabc42a1949cbe6565d5d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  stepParentImport: {fileID: 955951784}
   humanObjectImport: {fileID: 2231731997002958689, guid: 21d83d2f89418254096c1383905be8bc,
     type: 3}
 --- !u!1 &963194225

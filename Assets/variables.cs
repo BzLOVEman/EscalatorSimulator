@@ -82,9 +82,9 @@ public class variables : MonoBehaviour {
         stepSum = 10;
         stepLimite = 2;
         stepParent = this.gameObject;
-        simulationSpeed = 30;
-        slowlyRange = 1;
-        slowlyAdvance = 1;
+        simulationSpeed = 20;
+        slowlyRange = 0;
+        slowlyAdvance = 2;
         hurryRange = 2;
         hurryAdvance = 2;
 

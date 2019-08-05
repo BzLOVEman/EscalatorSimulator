@@ -5,12 +5,14 @@ using UnityEngine;
 public class Administlator : MonoBehaviour {
 
     private int flame = 0;
+    private int slowlyEnterRange = 0;
+    private int hurryEnterRange = 0;
 
     private void Awake() {
     }
 
     void Start() {
-        //        Debug.Log(variables.slowlyColumn.Length);
+        flame = variables.simulationSpeed;
     }
 
     void Update() {
@@ -22,7 +24,7 @@ public class Administlator : MonoBehaviour {
     }
 
     private void Simulation() {
-        //ゆっくりの人で最上段の人をtargetに配置する
+        //ゆっくりの人で最上段(とそこからslowlyAdvanceだけ下まで)の人をtargetに配置する
         if (variables.slowlyEscalator[variables.stepSum - 1] != -1) {
             //targetの配列の空きを確認する
             int i = 0;
@@ -30,10 +32,16 @@ public class Administlator : MonoBehaviour {
                 i++;
             //問題なく見つかれば
             if (i < variables.humanNum) {
-                //保存する
-                variables.endHuman[i] = variables.slowlyEscalator[variables.stepSum - 1];
-                //エスカレーターのステップを空いてる状態に
-                variables.slowlyEscalator[variables.stepSum - 1] = -1;
+                for (int j = 1; j <= variables.slowlyAdvance; j++) {
+                    if (variables.slowlyEscalator[variables.stepSum - j] != -1) {
+                        Debug.Log("run");
+                        //保存する
+                        variables.endHuman[i] = variables.slowlyEscalator[variables.stepSum - j];
+                        //エスカレーターのステップを空いてる状態に
+                        variables.slowlyEscalator[variables.stepSum - j] = -1;
+                        break;
+                    }
+                }
             } else {
                 //問題発生
                 Debug.LogWarning("Error.");
@@ -41,8 +49,8 @@ public class Administlator : MonoBehaviour {
         }
 
         //ゆっくりの人で既にエスカレータに乗ってる人を一つ上の段に上げる
-        for (int j = variables.stepSum - 2; 0 <= j; j--) {
-            variables.slowlyEscalator[j + 1] = variables.slowlyEscalator[j];
+        for (int j = variables.stepSum - 1 - variables.slowlyAdvance; 0 <= j; j--) {
+            variables.slowlyEscalator[j + variables.slowlyAdvance] = variables.slowlyEscalator[j];
             variables.slowlyEscalator[j] = -1;
         }
 
@@ -56,8 +64,13 @@ public class Administlator : MonoBehaviour {
             }
         }
         if (0 <= k) {
-            variables.slowlyEscalator[0] = variables.slowlyColumn[k];
-            variables.slowlyColumn[k] = -1;
+            if (variables.slowlyRange <= slowlyEnterRange) {
+                variables.slowlyEscalator[0] = variables.slowlyColumn[k];
+                variables.slowlyColumn[k] = -1;
+                slowlyEnterRange = 0;
+            } else {
+                slowlyEnterRange++;
+            }
         }
 
         //急ぐ人
@@ -76,13 +89,10 @@ public class Administlator : MonoBehaviour {
                 GameObject SHuman = GameObject.Find("Human" + variables.slowlyEscalator[l].ToString());
                 //L番目のエスカレーターのステップを取得
                 GameObject SStep = variables.stepParent.transform.Find(l.ToString() + 1.ToString()).gameObject;
-                //Debug.Log("L: " + l + "  human: " + variables.slowlyEscalator[l].ToString());
-                //            Debug.Log("SHuman: "+SHuman.transform.name);
                 //SHumanをSStepの上に移動させる
                 SHuman.transform.position = SStep.transform.position + Vector3.up;
                 n--;
             }
-            Debug.Log("L: " + l.ToString() + " = " + variables.slowlyEscalator[l]);
         }
         //targetの行き先（仮）
         n = 0;
