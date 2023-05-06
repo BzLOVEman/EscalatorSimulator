@@ -8,19 +8,26 @@ public class Administlator : MonoBehaviour {
     private int slowlyEnterRange = 0;
     private int hurryEnterRange = 0;
 
+    //進行速度
+    [SerializeField]
+    private float playSpeed;
+
     private void Awake() {
+        //FixedUpdateの実行速度の初期値を設定（デフォルトは0.02秒ごとの処理（50fps））
+        Time.fixedDeltaTime = 0.02f / playSpeed;
     }
 
     void Start() {
-        flame = variables.simulationSpeed;
+
     }
 
     void Update() {
-        flame++;
-        if (variables.simulationSpeed <= flame) {
-            flame = 0;
-            Simulation();
-        }
+        //FixedUpdateの実行速度の初期値を設定（デフォルトは0.02秒ごとの処理（50fps））
+        Time.fixedDeltaTime = 0.02f / playSpeed;
+    }
+
+    private void FixedUpdate() {
+        Simulation();
     }
 
     private void Simulation() {
